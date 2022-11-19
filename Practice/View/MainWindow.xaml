@@ -1,0 +1,77 @@
+﻿<Window x:Class="Practice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Подай на 16 - Главное окно" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="HeaderText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24pt"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground"   Value="#ff9d1a"/>
+        </Style>
+        <Style x:Key="DescriptionText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18pt"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="DiscondText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16pt"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,15,15,0"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight"   Value="DemiBold"/>
+        </Style>
+        <Style x:Key="Headerlabel" TargetType="Label">
+            <Setter Property="FontSize" Value="38"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#ff9d1a"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="185*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Image Margin="10" Source="/Resources/service_logo.png" IsEnabled="False" HorizontalAlignment="Left"/>
+            <Label Style="{StaticResource Headerlabel}" Content="Подай на 16"/>
+        </StackPanel>
+        <ListBox x:Name="ServicesList" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Grid.Column="0" BorderBrush="#4C4B4B" BorderThickness="5" Background="#ced5ef" Margin="10" Width="180" Height="180">
+                                <Image Source="{Binding ServicesImages.ImagePath}"/>
+                            </Border>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock x:Name="TextBlockServiceName" Style="{StaticResource HeaderText}" Text="{Binding ServiceName}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource DescriptionText}" x:Name="TextBlockCost" Text="{Binding Cost,StringFormat={}{0:0}}"/>
+                                    <TextBlock Style="{StaticResource DescriptionText}" Text=" рублей за "/>
+                                    <TextBlock Style="{StaticResource DescriptionText}" x:Name="TextBlockDuration" Text="{Binding Duration}"/>
+                                    <TextBlock Style="{StaticResource DescriptionText}" Text=" минут"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource DiscondText}" Text="* скидка "/>
+                                    <TextBlock Style="{StaticResource DiscondText}" x:Name="TextBlockDiscond" Text="{Binding Discond,StringFormat={}{0:P0}}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="ButtonEdit" Content="Редактировать"/>
+                                    <Button x:Name="ButtonRemove" Content="Удалить"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
