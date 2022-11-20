@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Подай на 16 - Главное окно" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Подай на 16 - Главное окно" MinHeight="600" MinWidth="900"
+        WindowStartupLocation="CenterScreen" Height="600" Width="900" WindowState="Maximized">
 
     <Window.Resources>
         <Style x:Key="HeaderText" TargetType="TextBlock">
@@ -29,25 +30,91 @@
         <Style x:Key="Headerlabel" TargetType="Label">
             <Setter Property="FontSize" Value="38"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#ff9d1a"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="FiltrationBorder" TargetType="Border">
+            <Setter Property="Background" Value="#75857E"/>
+        </Style>
+        <Style x:Key="DescondLabel" TargetType="CheckBox">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#48524d"/>
+            <Setter Property="BorderThickness" Value="3"/>
+        </Style>
+        <Style x:Key="DiscondComboBox" TargetType="ComboBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#48524d"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ButtonResetDiscond,Path=IsChecked}" Value="False">
+                    <Setter Property="SelectedIndex" Value="-1"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ButtonResetDiscond,Path=IsChecked}" Value="True">
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Width" Value="180"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="OptionBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#48524d"/>
+            <Setter Property="BorderThickness" Value="3"/>
         </Style>
     </Window.Resources>
 
     <Grid>
+        <!--#region Разметка окна-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="185*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <!--#endregion-->
+        <!--#region Шапка приложения: Логотип, название-->
+        <StackPanel Background="#1F2421" Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Image Margin="10" Source="/Resources/service_logo.png" IsEnabled="False" HorizontalAlignment="Left"/>
             <Label Style="{StaticResource Headerlabel}" Content="Подай на 16"/>
         </StackPanel>
-        <ListBox x:Name="ServicesList" Grid.Row="1">
+        <!--#endregion-->
+        <!--#region Панель параметров поиска и фильтрации-->
+        <Border Style="{StaticResource FiltrationBorder}" Grid.Row="1" Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+                <Border Style="{StaticResource OptionBorder}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="ButtonResetDiscond" Style="{StaticResource DescondLabel}" Content="Скидка"/>
+                        <ComboBox x:Name="DiscondComboBox" Style="{StaticResource DiscondComboBox}" SelectionChanged="DiscondComboBox_SelectionChanged">
+                            <ComboBoxItem Content="0% ~ 5%"/>
+                            <ComboBoxItem Content="5% ~ 15%"/>
+                            <ComboBoxItem Content="15% ~ 30%"/>
+                            <ComboBoxItem Content="30% ~ 70%"/>
+                            <ComboBoxItem Content="70% ~ 100%"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+        <!--#endregion-->
+        <!--#region Список услуг-->
+        <ListBox x:Name="ServicesList" Grid.Row="1" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border>
                         <StackPanel Orientation="Horizontal">
-                            <Border Grid.Column="0" BorderBrush="#4C4B4B" BorderThickness="5" Background="#ced5ef" Margin="10" Width="180" Height="180">
+                            <Border Grid.Column="0" Margin="10" Width="180" Height="180">
                                 <Image Source="{Binding ServicesImages.ImagePath}"/>
                             </Border>
                             <StackPanel Orientation="Vertical">
@@ -73,5 +140,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <!--#endregion-->
     </Grid>
 </Window>
