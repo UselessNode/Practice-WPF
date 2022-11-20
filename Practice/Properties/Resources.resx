@@ -124,6 +124,12 @@
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Numeric_sort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\numeric sort.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Numeric_sort_inverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\numeric sort inverted.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rulevoe_upravlenie_avtomobilya" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rulevoe-upravlenie-avtomobilya.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

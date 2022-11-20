@@ -23,17 +23,18 @@ namespace Practice
     public partial class MainWindow : Window
     {
         DatabaseEntities database;
+        List<Services_> servicesList;
         public MainWindow()
         {
             InitializeComponent();
 
             database = new DatabaseEntities();
-            ServicesList.ItemsSource = database.Services_.ToList();
+            servicesList = database.Services_.ToList();
+            ListBoxServices.ItemsSource = servicesList;
 
             LoadImages();
         }
 
-        ObservableCollection<Services_> services { get; set; }
 
         void LoadImages()
         {
@@ -47,32 +48,42 @@ namespace Practice
 
         private void DiscondComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ServicesList.ItemsSource = null;
-            List<Services_> data = database.Services_.ToList(); ;
             switch (DiscondComboBox.SelectedIndex)
             {
                 default:
                     break;
                 case -1:
-                    data = database.Services_.ToList();
+                    servicesList = database.Services_.ToList();
                     break;
                 case 0:
-                    data = database.Services_.Where(x => x.Discond.Value < 0.05d).ToList();
+                    servicesList = database.Services_.Where(service => service.Discond.Value < 0.05d).ToList();
                     break;
                 case 1:
-                    data = database.Services_.Where(x => x.Discond.Value > 0.05d && x.Discond.Value < 0.15d).ToList();
+                    servicesList = database.Services_.Where(service => service.Discond.Value > 0.05d && service.Discond.Value < 0.15d).ToList();
                     break;
                 case 2:
-                    data = database.Services_.Where(x => x.Discond.Value > 0.15d && x.Discond.Value < 0.30d).ToList();
+                    servicesList = database.Services_.Where(service => service.Discond.Value > 0.15d && service.Discond.Value < 0.30d).ToList();
                     break;
                 case 3:
-                    data = database.Services_.Where(x => x.Discond.Value > 0.30d && x.Discond.Value < 0.70d).ToList();
+                    servicesList = database.Services_.Where(service => service.Discond.Value > 0.30d && service.Discond.Value < 0.70d).ToList();
                     break;
                 case 4:
-                    data = database.Services_.Where(x => x.Discond.Value > 0.70d && x.Discond.Value < 1d).ToList();
+                    servicesList = database.Services_.Where(service => service.Discond.Value > 0.70d && service.Discond.Value < 1d).ToList();
                     break;
             }
-            ServicesList.ItemsSource = data;
+            ListBoxServices.ItemsSource = servicesList;
+            DiscondComboBox.Width = Double.NaN;
+        }
+
+        private void CheckBoxCostSort_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckBoxCostSort.IsChecked == true)
+                servicesList = database.Services_.OrderBy(service => service.Cost).ToList();
+            else if (CheckBoxCostSort.IsChecked == false)
+                servicesList = database.Services_.OrderByDescending(service => service.Cost).ToList();
+            else
+                servicesList = database.Services_.ToList();
+            ListBoxServices.ItemsSource = servicesList;
         }
     }
 }

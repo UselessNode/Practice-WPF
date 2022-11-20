@@ -35,7 +35,7 @@
         <Style x:Key="FiltrationBorder" TargetType="Border">
             <Setter Property="Background" Value="#75857E"/>
         </Style>
-        <Style x:Key="DescondLabel" TargetType="CheckBox">
+        <Style TargetType="CheckBox">
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -55,21 +55,28 @@
             <Setter Property="BorderBrush" Value="#48524d"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=ButtonResetDiscond,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=CheckBoxDiscond,Path=IsChecked}" Value="False">
                     <Setter Property="SelectedIndex" Value="-1"/>
                     <Setter Property="IsEnabled" Value="False"/>
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=ButtonResetDiscond,Path=IsChecked}" Value="True">
+                <DataTrigger Binding="{Binding ElementName=CheckBoxDiscond,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="True"/>
                     <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Width" Value="180"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="OptionBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="#48524d"/>
-            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderThickness" Value="0,0,0,3"/>
+        </Style>
+        <Style x:Key="OptionLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
 
@@ -90,12 +97,14 @@
             <Label Style="{StaticResource Headerlabel}" Content="Подай на 16"/>
         </StackPanel>
         <!--#endregion-->
-        <!--#region Панель параметров поиска и фильтрации-->
+        <!--#region Панель параметров вывода-->
+
         <Border Style="{StaticResource FiltrationBorder}" Grid.Row="1" Grid.Column="0">
             <StackPanel Orientation="Vertical">
+                <!--#region Фильтрация по скидке-->
                 <Border Style="{StaticResource OptionBorder}">
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox x:Name="ButtonResetDiscond" Style="{StaticResource DescondLabel}" Content="Скидка"/>
+                        <CheckBox x:Name="CheckBoxDiscond" Content="По скидке"/>
                         <ComboBox x:Name="DiscondComboBox" Style="{StaticResource DiscondComboBox}" SelectionChanged="DiscondComboBox_SelectionChanged">
                             <ComboBoxItem Content="0% ~ 5%"/>
                             <ComboBoxItem Content="5% ~ 15%"/>
@@ -105,11 +114,19 @@
                         </ComboBox>
                     </StackPanel>
                 </Border>
+                <!--#endregion-->
+                <!--#region Сортировка по цене услуги-->
+                <Border Style="{StaticResource OptionBorder}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="CheckBoxCostSort" Content="По стоимости" IsThreeState="True" Click="CheckBoxCostSort_Click"/>
+                    </StackPanel>
+                </Border>
+                <!--#endregion-->
             </StackPanel>
         </Border>
         <!--#endregion-->
         <!--#region Список услуг-->
-        <ListBox x:Name="ServicesList" Grid.Row="1" Grid.Column="1">
+        <ListBox x:Name="ListBoxServices" Grid.Row="1" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border>
