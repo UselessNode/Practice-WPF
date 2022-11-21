@@ -1,4 +1,5 @@
 ﻿using Practice.Database;
+using Practice.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace Practice
     /// </summary>
     public partial class MainWindow : Window
     {
-        DatabaseEntities database;
+        public DatabaseEntities database { get; set; }
         List<Services_> servicesList;
         public MainWindow()
         {
@@ -84,6 +85,31 @@ namespace Practice
             else
                 servicesList = database.Services_.ToList();
             ListBoxServices.ItemsSource = servicesList;
+        }
+
+        public Services_ selectedService { get; set; }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            selectedService = (Services_)ListBoxServices.SelectedItem;
+            EditWindow editWindow = new EditWindow(selectedService);
+            editWindow.Show();
+            Hide();
+        }
+
+        private void ButtonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ListBoxServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

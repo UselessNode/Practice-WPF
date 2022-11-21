@@ -5,8 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practice.View"
         mc:Ignorable="d"
-        Title="Редактирование" Height="450" Width="800">
+        Title="Редактирование" Height="450" Width="600" MinWidth="600" MinHeight="450" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed">
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="#75857e"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="BorderBrush" Value="#48524d"/>
+            <Setter Property="BorderThickness" Value="3,0,3,3"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="#313835"/>
+            <Setter Property="BorderBrush" Value="#313835"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="#313835"/>
+            <Setter Property="Background" Value="#b8d1c6"/>
+            <Setter Property="Foreground" Value="#313835"/>
+            <Setter Property="BorderThickness" Value="0,0,3,3"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <!--#region Разметка окна-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+        <Border Grid.Row="1" Grid.Column="0">
+            <Label Content="Название"/>
+        </Border>
+        <Border  Grid.Row="2" Grid.Column="0">
+            <Label Content="Длительность"/>
+        </Border>
+        <Border  Grid.Row="3" Grid.Column="0" >
+            <Label Content="Стоимость"/>
+        </Border>
+        <Border Grid.Row="4" Grid.Column="0" >
+            <Label Content="Скидка"/>
+        </Border>
+
+        <!--#region Подпись номера Id -->
+        <Border Panel.ZIndex="999" Grid.Row="0" Grid.Column="0" Width="auto" Height="auto" BorderThickness="3" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Label x:Name="LabelId" Content="#####"/>
+        </Border>
+        <!--#endregion-->
+        <!--#region Изображение-->
+        <Border Grid.Row="0" Grid.ColumnSpan ="2" BorderThickness="3" Background="White">
+            <Image x:Name="ImageBox"/>
+        </Border>
+        <!--#endregion-->
+
+        <TextBox x:Name="TextBoxName"       Grid.Row="1"    Grid.Column="1" Text="################"/>
+        <TextBox x:Name="TextBoxDuration"   Grid.Row="2"    Grid.Column="1" Text="################"/>
+        <TextBox x:Name="TextBoxCost"       Grid.Row="3"    Grid.Column="1" Text="################"/>
+        <TextBox x:Name="TextBoxDiscond"    Grid.Row="4"    Grid.Column="1" Text="################"/>
+        <Button x:Name="ButtonSave"         Content="Сохранить" Grid.Row="5" Grid.Column="0" 
+                BorderBrush="#1F6D36" Foreground="White" Background="#5EB277" 
+                HorizontalAlignment="Left"/>
+        <Button x:Name="ButtonExit"         Content="Отмена"    Grid.Row="5" Grid.Column="0" 
+                BorderBrush="#6D1F3D" Foreground="White" Background="#b25e92" 
+                HorizontalAlignment="Left" Margin="100,0,0,0" Click="ButtonExit_Click"/>
     </Grid>
 </Window>

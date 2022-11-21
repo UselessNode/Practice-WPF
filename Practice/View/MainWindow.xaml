@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Подай на 16 - Главное окно" MinHeight="600" MinWidth="900"
-        WindowStartupLocation="CenterScreen" Height="600" Width="900" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" Height="600" Width="900" WindowState="Maximized"
+        Closing="Window_Closing">
 
     <Window.Resources>
         <Style x:Key="HeaderText" TargetType="TextBlock">
@@ -66,6 +67,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
         <Style x:Key="OptionBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="#48524d"/>
             <Setter Property="BorderThickness" Value="0,0,0,3"/>
@@ -147,13 +149,12 @@
                                     <TextBlock Style="{StaticResource DiscondText}" x:Name="TextBlockDiscond" Text="{Binding Discond,StringFormat={}{0:P0}}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="ButtonEdit" Content="Редактировать"/>
-                                    <Button x:Name="ButtonRemove" Content="Удалить"/>
+                                    <Button x:Name="ButtonEdit" Content="Редактировать" Click="ButtonEdit_Click"/>
+                                    <Button x:Name="ButtonRemove" Content="Удалить" Click="ButtonRemove_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Border>
-
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
