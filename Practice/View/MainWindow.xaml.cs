@@ -23,28 +23,26 @@ namespace Practice
     /// </summary>
     public partial class MainWindow : Window
     {
-        public DatabaseEntities database { get; set; }
+        public PracticeEntities database { get; set; }
         List<Services_> servicesList;
         public MainWindow()
         {
             InitializeComponent();
 
-            database = new DatabaseEntities();
-            servicesList = database.Services_.ToList();
-            ListBoxServices.ItemsSource = servicesList;
-
-            LoadImages();
+            database = new PracticeEntities();
+            ReloadList();
         }
 
 
-        void LoadImages()
+        void ReloadList()
         {
-            // Добавление?
+            servicesList = database.Services_.ToList();
+            ListBoxServices.ItemsSource = servicesList;
 
-            //services = new ObservableCollection<Services_>
-            //{
-            //    new Services_ { Id = }
-            //}
+            TextBoxSeach.Text = null;
+            ButtonResetSearch.Visibility = Visibility.Collapsed;
+            ListBoxServices.ItemsSource = database.Services_.ToList();
+            Title = $"Подай на 16 - Главное окно | Результатов: {servicesList.Count}";
         }
 
         private void DiscondComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,19 +85,44 @@ namespace Practice
             ListBoxServices.ItemsSource = servicesList;
         }
 
-        public Services_ selectedService { get; set; }
+        //public Services_ selectedService { get; set; }
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
-            selectedService = (Services_)ListBoxServices.SelectedItem;
-            EditWindow editWindow = new EditWindow(selectedService);
-            editWindow.Show();
-            Hide();
+            AuthWindow auth = new AuthWindow();
+            if (auth.ShowDialog() == true)
+            {
+                if (auth.Password == "1111")
+                {
+                    var selectedService = ((sender as Button).DataContext as Services_);
+                    EditWindow editWindow = new EditWindow(selectedService, this);
+                    editWindow.Show();
+                    Hide();
+                }
+                else
+                    MessageBox.Show($"Неверный код доступа. Доступ воспрещён", "Доступ", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
-            
+            AuthWindow auth = new AuthWindow();
+            if (auth.ShowDialog() == true)
+            {
+                if (auth.Password == "1111")
+                {
+                    var selectedService = ((sender as Button).DataContext as Services_);
+                    if (MessageBox.Show($"Вы уверены, что хотите удалить\n[{selectedService.ServiceName}]?",
+                        "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        database.Services_.Remove(selectedService);
+                        database.SaveChanges();
+                        //ReloadList();
+                    }
+                }
+                else
+                    MessageBox.Show($"Неверный код доступа. Доступ воспрещён", "Доступ", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -107,9 +130,40 @@ namespace Practice
             Application.Current.Shutdown();
         }
 
-        private void ListBoxServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
+            AuthWindow auth = new AuthWindow();
+            if (auth.ShowDialog() == true)
+            {
+                if (auth.Password == "0000")
+                {
+                    EditWindow editWindow = new EditWindow(this);
+                    editWindow.Show();
+                    Hide();
+                }
+                else
+                    MessageBox.Show($"Неверный код доступа. Доступ воспрещён", "Доступ", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+        }
 
+        private void TextBoxSeach_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var input = (sender as TextBox).Text.ToLower();
+            if (!(String.IsNullOrEmpty(input)))
+            {
+                ButtonResetSearch.Visibility = Visibility.Visible;
+                var searchResult = servicesList;
+                int resultCount = searchResult.Count(services => services.ServiceName.Contains(input));
+                ListBoxServices.ItemsSource = searchResult.Where(services => services.ServiceName.Contains(input)).ToList();
+                Title = $"Подай на 16 - Главное окно | Поиск: {input} | Результатов: {resultCount} из {servicesList.Count}";
+            }
+            else
+                ReloadList();
+        }
+
+        private void ButtonResetSearch_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadList();
         }
     }
 }

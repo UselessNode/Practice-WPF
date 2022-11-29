@@ -1,0 +1,20 @@
+﻿<Window x:Class="Practice.View.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize"
+        Title="Password" Height="185" Width="320">
+    <Grid>
+        <StackPanel VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Введите код доступа" Margin="0,10,0,0" FontSize="22" FontWeight="Bold" Foreground="#FF22465D"/>
+            <Border BorderBrush="#22465d" BorderThickness="2" Margin="0,10,0,0" Width="210">
+                <PasswordBox x:Name="passwordBox" Background="#6C95AF" Foreground="White" BorderThickness="0" FontSize="16"/>
+            </Border>
+            <Button BorderBrush="#22465d" Background="#6C95AF" Foreground="White" Margin="0,10,0,0" Content="Ввод" FontWeight="Bold" FontSize="16" Width="120" Click="Button_Click"/>
+        </StackPanel>
+
+
+    </Grid>
+</Window>
+

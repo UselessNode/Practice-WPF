@@ -4,17 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09c0132460fe4c5fb2efaf8e6acff636" Name="Diagram1">
-        <EntityTypeShape EntityType="PracticeModel.Clients" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Genders" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Orders" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Services_" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.ServicesImages" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="9d37d83cc6584589a83517252dd2d3ab" Name="Diagram1">
+        <EntityTypeShape EntityType="PracticeModel.Clients" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeModel.Genders" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeModel.Orders" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeModel.Services_" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PracticeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="PracticeModel.FK_Clients_Genders" ManuallyRouted="false" />
         <AssociationConnector Association="PracticeModel.FK_Orders_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="PracticeModel.FK_Orders_Services_" ManuallyRouted="false" />
-        <AssociationConnector Association="PracticeModel.FK_Services__ServicesImages" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

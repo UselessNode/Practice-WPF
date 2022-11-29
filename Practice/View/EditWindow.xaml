@@ -69,24 +69,26 @@
 
         <!--#region Подпись номера Id -->
         <Border Panel.ZIndex="999" Grid.Row="0" Grid.Column="0" Width="auto" Height="auto" BorderThickness="3" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Label x:Name="LabelId" Content="#####"/>
+            <Label x:Name="LabelId" Content="{Binding Id}"/>
         </Border>
         <!--#endregion-->
         <!--#region Изображение-->
+
+
         <Border Grid.Row="0" Grid.ColumnSpan ="2" BorderThickness="3" Background="White">
-            <Image x:Name="ImageBox"/>
+            <Image x:Name="ImageBox" Source="{Binding ImagePath}"/>
         </Border>
         <!--#endregion-->
 
-        <TextBox x:Name="TextBoxName"       Grid.Row="1"    Grid.Column="1" Text="################"/>
-        <TextBox x:Name="TextBoxDuration"   Grid.Row="2"    Grid.Column="1" Text="################"/>
-        <TextBox x:Name="TextBoxCost"       Grid.Row="3"    Grid.Column="1" Text="################"/>
-        <TextBox x:Name="TextBoxDiscond"    Grid.Row="4"    Grid.Column="1" Text="################"/>
+        <TextBox x:Name="TextBoxName"       Grid.Row="1"    Grid.Column="1" Text="{Binding ServiceName}"/>
+        <TextBox x:Name="TextBoxDuration"   Grid.Row="2"    Grid.Column="1" Text="{Binding Duration}"/>
+        <TextBox x:Name="TextBoxCost"       Grid.Row="3"    Grid.Column="1" Text="{Binding Cost}"/>
+        <TextBox x:Name="TextBoxDiscond"    Grid.Row="4"    Grid.Column="1" Text="{Binding Discond}"/>
         <Button x:Name="ButtonSave"         Content="Сохранить" Grid.Row="5" Grid.Column="0" 
                 BorderBrush="#1F6D36" Foreground="White" Background="#5EB277" 
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left" Margin="10,0,0,0" Click="ButtonSave_Click"/>
         <Button x:Name="ButtonExit"         Content="Отмена"    Grid.Row="5" Grid.Column="0" 
                 BorderBrush="#6D1F3D" Foreground="White" Background="#b25e92" 
-                HorizontalAlignment="Left" Margin="100,0,0,0" Click="ButtonExit_Click"/>
+                HorizontalAlignment="Left" Margin="111,0,0,0" Click="ButtonExit_Click" Width="79"/>
     </Grid>
 </Window>

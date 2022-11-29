@@ -15,10 +15,10 @@ namespace Practice.Database
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class DatabaseEntities : DbContext
+    public partial class PracticeEntities : DbContext
     {
-        public DatabaseEntities()
-            : base("name=DatabaseEntities")
+        public PracticeEntities()
+            : base("name=PracticeEntities")
         {
         }
     
@@ -31,7 +31,6 @@ namespace Practice.Database
         public virtual DbSet<Genders> Genders { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Services_> Services_ { get; set; }
-        public virtual DbSet<ServicesImages> ServicesImages { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

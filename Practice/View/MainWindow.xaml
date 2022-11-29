@@ -67,7 +67,9 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
+        <Style x:Key="SearchBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
         <Style x:Key="OptionBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="#48524d"/>
             <Setter Property="BorderThickness" Value="0,0,0,3"/>
@@ -100,7 +102,6 @@
         </StackPanel>
         <!--#endregion-->
         <!--#region Панель параметров вывода-->
-
         <Border Style="{StaticResource FiltrationBorder}" Grid.Row="1" Grid.Column="0">
             <StackPanel Orientation="Vertical">
                 <!--#region Фильтрация по скидке-->
@@ -124,6 +125,13 @@
                     </StackPanel>
                 </Border>
                 <!--#endregion-->
+                <Border Style="{StaticResource OptionBorder}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Style="{StaticResource SearchBox}" x:Name="TextBoxSeach" 
+                                 Width="350" TextChanged="TextBoxSeach_TextChanged"/>
+                    </StackPanel>
+                </Border>
+                <Button x:Name="ButtonResetSearch" Content="Сброс поиска" Click="ButtonResetSearch_Click" Visibility="Collapsed"/>
             </StackPanel>
         </Border>
         <!--#endregion-->
@@ -133,9 +141,11 @@
                 <DataTemplate>
                     <Border>
                         <StackPanel Orientation="Horizontal">
+                            <!--#region Изображение-->
                             <Border Grid.Column="0" Margin="10" Width="180" Height="180">
-                                <Image Source="{Binding ServicesImages.ImagePath}"/>
+                                <Image Source="{Binding ImagePath}"/>
                             </Border>
+                            <!--#endregion-->
                             <StackPanel Orientation="Vertical">
                                 <TextBlock x:Name="TextBlockServiceName" Style="{StaticResource HeaderText}" Text="{Binding ServiceName}"/>
                                 <StackPanel Orientation="Horizontal">
@@ -157,7 +167,12 @@
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <!--<Line/>-->
         </ListBox>
+        <!--#endregion-->
+        <!--#region Кнопка добавления-->
+        <Button x:Name="ButtonCreate" Content="Добавить новую услугу" Width="auto" Padding="15,0,15,5" Panel.ZIndex="999"
+                Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" Click="ButtonCreate_Click"/>
         <!--#endregion-->
     </Grid>
 </Window>

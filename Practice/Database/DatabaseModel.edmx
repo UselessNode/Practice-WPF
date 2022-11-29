@@ -44,12 +44,6 @@
           <Property Name="Duration" Type="int" />
           <Property Name="Cost" Type="money" />
           <Property Name="Discond" Type="float" />
-        </EntityType>
-        <EntityType Name="ServicesImages">
-          <Key>
-            <PropertyRef Name="IdService" />
-          </Key>
-          <Property Name="IdService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImagePath" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -98,18 +92,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Services _ServicesImages">
-          <End Role="ServicesImages" Type="Self.ServicesImages" Multiplicity="1" />
-          <End Role="Services " Type="Self.Services " Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ServicesImages">
-              <PropertyRef Name="IdService" />
-            </Principal>
-            <Dependent Role="Services ">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -146,7 +128,6 @@
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services " EntityType="Self.Services " Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ServicesImages" EntityType="Self.ServicesImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Clients_Genders" Association="Self.FK_Clients_Genders">
             <End Role="Genders" EntitySet="Genders" />
@@ -159,10 +140,6 @@
           <AssociationSet Name="FK_Orders_Services " Association="Self.FK_Orders_Services ">
             <End Role="Services " EntitySet="Services " />
             <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Services _ServicesImages" Association="Self.FK_Services _ServicesImages">
-            <End Role="ServicesImages" EntitySet="ServicesImages" />
-            <End Role="Services " EntitySet="Services " />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -214,16 +191,8 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Discond" Type="Double" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Services_" FromRole="Services_" ToRole="Orders" />
-          <NavigationProperty Name="ServicesImages" Relationship="Self.FK_Services__ServicesImages" FromRole="Services_" ToRole="ServicesImages" />
-        </EntityType>
-        <EntityType Name="ServicesImages">
-          <Key>
-            <PropertyRef Name="IdService" />
-          </Key>
-          <Property Name="IdService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImagePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Services_" Relationship="Self.FK_Services__ServicesImages" FromRole="ServicesImages" ToRole="Services_" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Services_" FromRole="Services_" ToRole="Orders" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -271,24 +240,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Services__ServicesImages">
-          <End Role="ServicesImages" Type="Self.ServicesImages" Multiplicity="1" />
-          <End Role="Services_" Type="Self.Services_" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ServicesImages">
-              <PropertyRef Name="IdService" />
-            </Principal>
-            <Dependent Role="Services_">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PracticeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Genders" EntityType="Self.Genders" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Services_" EntityType="Self.Services_" />
-          <EntitySet Name="ServicesImages" EntityType="Self.ServicesImages" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_Clients_Genders" Association="Self.FK_Clients_Genders">
             <End Role="Genders" EntitySet="Genders" />
@@ -301,10 +257,6 @@
           <AssociationSet Name="FK_Orders_Services_" Association="Self.FK_Orders_Services_">
             <End Role="Services_" EntitySet="Services_" />
             <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Services__ServicesImages" Association="Self.FK_Services__ServicesImages">
-            <End Role="ServicesImages" EntitySet="ServicesImages" />
-            <End Role="Services_" EntitySet="Services_" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -353,7 +305,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PracticeModelContainer" CdmEntityContainer="DatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PracticeModelContainer" CdmEntityContainer="PracticeEntities">
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="PracticeModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
@@ -395,13 +347,6 @@
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Discond" ColumnName="Discond" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServicesImages">
-            <EntityTypeMapping TypeName="PracticeModel.ServicesImages">
-              <MappingFragment StoreEntitySet="ServicesImages">
-                <ScalarProperty Name="IdService" ColumnName="IdService" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
               </MappingFragment>
             </EntityTypeMapping>

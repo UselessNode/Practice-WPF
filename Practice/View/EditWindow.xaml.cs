@@ -1,4 +1,5 @@
-﻿using Practice.Database;
+﻿using Microsoft.Win32;
+using Practice.Database;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,15 +22,28 @@ namespace Practice.View
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow(Services_ service)
+        MainWindow MainWindow;
+        Services_ currietnService;
+        public EditWindow(Services_ service, MainWindow mainWindow)
         {
             InitializeComponent();
-            LoadInputs(service);
+            currietnService = service;
+            DataContext = currietnService;            
+            MainWindow = mainWindow;
+        }
+
+        public EditWindow(MainWindow mainWindow)
+        {
+            InitializeComponent();
+            currietnService = new Services_();
+            DataContext = currietnService;
+            MainWindow = mainWindow;
+            LabelId.Visibility = Visibility.Collapsed;
         }
 
         private void LoadInputs(Services_ service)
         {
-            ImageBox.Source = GetImageSource(service.ServicesImages.ImagePath);
+            //ImageBox.Source = GetImageSource(service.ServicesImages.ImagePath);
             LabelId.Content = service.Id;
             TextBoxName.Text = service.ServiceName.ToString();
             TextBoxDuration.Text = service.Duration.ToString();
@@ -48,10 +62,10 @@ namespace Practice.View
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            CancelEditing();
+            CloseEditingWindow();
         }
 
-        private void CancelEditing()
+        private void CloseEditingWindow()
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
@@ -60,7 +74,36 @@ namespace Practice.View
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            CancelEditing();
+            CloseEditingWindow();
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if(currietnService.Id == 0)
+                MainWindow.database.Services_.Add(currietnService);
+
+            MainWindow.database.SaveChanges();
+            MessageBox.Show("Операция выполнена успешно");
+            CloseEditingWindow();
+        }
+
+        private void UpdateService()
+        {
+            Services_ service = new Services_();
+            service.Id = currietnService.Id;
+            service.ServiceName = TextBoxName.Text;
+            service.Cost = Decimal.Parse(TextBoxCost.Text);
+            service.Duration = int.Parse(TextBoxDuration.Text);
+            service.Discond = Double.Parse(TextBoxDiscond.Text);
+            //service.ServicesImages.ImagePath = service.
+            MainWindow.database.Services_.Add(service);
+            MainWindow.database.SaveChanges();
+            CloseEditingWindow();
+        }
+
+        private void ImageBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
