@@ -1,0 +1,149 @@
+﻿<Window x:Class="Practice.View.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:System;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Practice.View"
+        mc:Ignorable="d"
+        Title="RegistrationWindow" Height="700" Width="700">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="date" ObjectType="{x:Type src:DateTime}"/>
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="#75857e"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="BorderBrush" Value="#48524d"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="#313835"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#313835"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#313835"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl>
+            <TabItem Header="Запись">
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="auto">
+                        <Border>
+                            <Label Content="Услуга"/>
+                        </Border>
+                        <Border>
+                            <Label x:Name="LabelServiceName" Foreground="Black" Background="White"/>
+                        </Border>
+                        <Border>
+                            <Label Content="Пользователь"/>
+                        </Border>
+                        <Border>
+                            <ComboBox x:Name="ComboBoxClient" ItemsSource="{Binding}" BorderThickness="0"/>
+                        </Border>
+                        <Border>
+                            <Label Content="Дата"/>
+                        </Border>
+                        <Border>
+                            <TextBox x:Name="TextBoxDate" Text="{Binding Source={StaticResource date},Path=Now, Mode=OneWay}"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,5,0" Click="ButtonSave_Click"/>
+                            <Button x:Name="ButtonCansel" Content="Отмена" Margin="5,0,0,0" Click="ButtonCansel_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Добавление нового клиента">
+                <Grid>
+                    <!--#region Разметка окна-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="31*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--#endregion-->
+
+                    <Border Grid.Row="0" Grid.Column="0">
+                        <Label Content="Фамилия"/>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="1">
+                        <Label Content="Имя" />
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0">
+                        <Label Content="Отчество"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="0">
+                        <Label Content="Пол"/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="0">
+                        <Label Content="Номер телефона"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="0">
+                        <Label Content="Дата рождения"/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="0">
+                        <Label Content="Эл.почта"/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="0">
+                        <Label Content="Дата регистрации"/>
+                    </Border>
+
+                    <Border Grid.Row="0" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="6" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                    <Border Grid.Row="7" Grid.Column="1">
+                        <TextBox/>
+                    </Border>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

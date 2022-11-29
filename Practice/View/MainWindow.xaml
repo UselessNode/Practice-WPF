@@ -161,13 +161,13 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button x:Name="ButtonEdit" Content="Редактировать" Click="ButtonEdit_Click"/>
                                     <Button x:Name="ButtonRemove" Content="Удалить" Click="ButtonRemove_Click"/>
+                                    <!--<Button x:Name="ButtonSighIn" Content="Записать на услугу" Width="190" Click="ButtonSighIn_Click"/>-->
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <!--<Line/>-->
         </ListBox>
         <!--#endregion-->
         <!--#region Кнопка добавления-->

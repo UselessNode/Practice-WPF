@@ -38,10 +38,8 @@ namespace Practice
         {
             servicesList = database.Services_.ToList();
             ListBoxServices.ItemsSource = servicesList;
-
             TextBoxSeach.Text = null;
             ButtonResetSearch.Visibility = Visibility.Collapsed;
-            ListBoxServices.ItemsSource = database.Services_.ToList();
             Title = $"Подай на 16 - Главное окно | Результатов: {servicesList.Count}";
         }
 
@@ -92,7 +90,7 @@ namespace Practice
             AuthWindow auth = new AuthWindow();
             if (auth.ShowDialog() == true)
             {
-                if (auth.Password == "1111")
+                if (auth.Password == Properties.Settings.Default.Password)
                 {
                     var selectedService = ((sender as Button).DataContext as Services_);
                     EditWindow editWindow = new EditWindow(selectedService, this);
@@ -109,7 +107,7 @@ namespace Practice
             AuthWindow auth = new AuthWindow();
             if (auth.ShowDialog() == true)
             {
-                if (auth.Password == "1111")
+                if (auth.Password == Properties.Settings.Default.Password)
                 {
                     var selectedService = ((sender as Button).DataContext as Services_);
                     if (MessageBox.Show($"Вы уверены, что хотите удалить\n[{selectedService.ServiceName}]?",
@@ -135,7 +133,7 @@ namespace Practice
             AuthWindow auth = new AuthWindow();
             if (auth.ShowDialog() == true)
             {
-                if (auth.Password == "0000")
+                if (auth.Password == Properties.Settings.Default.Password)
                 {
                     EditWindow editWindow = new EditWindow(this);
                     editWindow.Show();
@@ -164,6 +162,26 @@ namespace Practice
         private void ButtonResetSearch_Click(object sender, RoutedEventArgs e)
         {
             ReloadList();
+        }
+
+        private void ButtonSighIn_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedService = ((sender as Button).DataContext as Services_);
+            RegistrationWindow registrationWindow = new RegistrationWindow(selectedService, this);
+            registrationWindow.Show();
+
+            //AuthWindow auth = new AuthWindow();
+            //if (auth.ShowDialog() == true)
+            //{
+            //    if (auth.Password == Properties.Settings.Default.Password)
+            //    {
+            //        var selectedService = ((sender as Button).DataContext as Services_);
+            //        RegistrationWindow registrationWindow = new RegistrationWindow(selectedService, this);
+            //        registrationWindow.Show();
+            //    }
+            //    else
+            //        MessageBox.Show($"Неверный код доступа. Доступ воспрещён", "Доступ", MessageBoxButton.OK, MessageBoxImage.Stop);
+            //}
         }
     }
 }

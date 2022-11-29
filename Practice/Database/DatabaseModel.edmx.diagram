@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9d37d83cc6584589a83517252dd2d3ab" Name="Diagram1">
-        <EntityTypeShape EntityType="PracticeModel.Clients" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Genders" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Orders" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.Services_" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PracticeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeModel.Clients" Width="1.5" PointX="3" PointY="1" IsExpanded="true" FillColor="150, 122, 204" />
+        <EntityTypeShape EntityType="PracticeModel.Genders" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" FillColor="150, 122, 204" />
+        <EntityTypeShape EntityType="PracticeModel.Orders" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" FillColor="150, 122, 204" />
+        <EntityTypeShape EntityType="PracticeModel.Services_" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" FillColor="150, 122, 204" />
+        <EntityTypeShape EntityType="PracticeModel.sysdiagrams" Width="1.5" PointX="14.375" PointY="5.125" IsExpanded="true" FillColor="150, 122, 204" />
         <AssociationConnector Association="PracticeModel.FK_Clients_Genders" ManuallyRouted="false" />
         <AssociationConnector Association="PracticeModel.FK_Orders_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="PracticeModel.FK_Orders_Services_" ManuallyRouted="false" />
